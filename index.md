@@ -49,8 +49,6 @@ For your first milestone, describe what your project is and how you plan to buil
 -->
 # Starter Project : Jitterbug
 
-**Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
-
 <iframe width="560" height="315" src="https://www.youtube.com/embed/7qXCmAjE5eM?si=l6Hw6ky5PzJQHeuj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 This was my first project here at BlueStamp where I put my soldering skills to the test.  I would've completed it on my first day if it wasn't for my soldering mistake.  I soldered the LEDs the wrong way, and removing them took time.  I learned that I must be exact when soldering or else I will suffer.
