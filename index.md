@@ -37,7 +37,7 @@ For your second milestone, explain what you've worked on since your previous mil
 -->
 # First Milestone
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/CaCazFBhYKs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/eIhywB4pccY?si=DQWUQpK5KKYoSYFi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 This is the first milestone for my smart glasses project, which is setting up the raspberry pi.  This was not much of a challenge but it look a long time to download all the apps I needed for the raspberry pi and downloading the software for the pi.  All waiting aside, now it works well.
 
