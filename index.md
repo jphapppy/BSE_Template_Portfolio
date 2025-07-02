@@ -27,13 +27,13 @@ Replace this text with a brief description (2-3 sentences) of your project. This
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/KwafafNAArw?si=tgGg_9rC-52swaLf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-I transitioned from openCV to tensorFlow so I could get videos.  The frame rate is low, but the dectection is okay.  The amount of commands I had to input into the terminal was a suprise.  Last milestone, I couldn't see exactly what the camera was seeing, but now I can see everything the camera is seeing thanks to tensorFlow.  I now need to put the camera on the glasses.
+I transitioned from openCV to tensorFlow so I could get videos.  The frame rate is low, but the dectection is okay.  The amount of commands I had to input into the terminal was a suprise.  Last milestone, I couldn't see exactly what the camera was seeing, but now I can see everything the camera is seeing thanks to tensorFlow.  The camera is able to detect computer keyboards, mouses, and items tensorFlow knows.  The text to speech works well, but its voice sounds choppy, so I may want to get a better one. I want to put a longer cable for more mobility as well. I now need to put the camera on the glasses.
 
 # First Milestone
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eIhywB4pccY?si=DQWUQpK5KKYoSYFi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-This is the first milestone for my smart glasses project, which is setting up the raspberry pi.  This was not much of a challenge but it look a long time to download all the apps I needed for the raspberry pi and downloading the software for the pi.  All waiting aside, now it works well.
+This is the first milestone for my smart glasses project, which is setting up the raspberry pi.  This was not much of a challenge but it look a long time to download all the apps I needed for the raspberry pi and downloading the software for the pi.  All waiting aside, now it works well.  I can only take one picture at a time using openCV, but this the first step at using the camera.
 
 # Starter Project : Jitterbug
 
