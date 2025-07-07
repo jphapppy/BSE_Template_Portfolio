@@ -1,5 +1,5 @@
 # Smart Glasses
-Replace this text with a brief description (2-3 sentences) of your project. This description should draw the reader in and make them interested in what you've built. You can include what the biggest challenges, takeaways, and triumphs from completing the project were. As you complete your portfolio, remember your audience is less familiar than you are with all that your project entails!
+Instead of holding a camera, smart glasses offer a hands free way to record stuff!  These involve mounting a camera onto a pair of glasses and connecting it to a simple processor system like a raspberry Pi so it is portable.  The camera won't 100% detect what your eyes are seeing, but it still gets most of what your eyes are seeing.
 
 | **Engineer** | **School** | **Area of Interest** | **Grade** |
 |:--:|:--:|:--:|:--:|
