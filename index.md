@@ -46,7 +46,7 @@ This was my first project here at BlueStamp where I put my soldering skills to t
 Here's where you'll put images of your schematics. [Tinkercad](https://www.tinkercad.com/blog/official-guide-to-tinkercad-circuits) and [Fritzing](https://fritzing.org/learning/) are both great resoruces to create professional schematic diagrams, though BSE recommends Tinkercad becuase it can be done easily and for free in the browser. 
 -->
 # Code
-Here's where you'll put your code. The syntax below places it into a block of code. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize it to your project needs. 
+This is my code for taking a photo and uploading it to my google drive.  First, I am importing core modules needed to authenticate with google cloud and upload files to google drive.  Then, I am importing modules realated to the piCam taking pictures.  Next, the piCam takes a picture and writes in in the "file.png" file.  Then, I am declaring my scope.  I set it to "allow all access to drive" so it could upload files and overcome permission errors.  Since I already made my token and authorized it, the code then checks my creditials then my token, then continues with the upload.  I set it to go to one of the folders in my google drive.
 
 ```c++
 from googleapiclient.discovery import build
