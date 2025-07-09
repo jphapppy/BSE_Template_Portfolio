@@ -5,25 +5,20 @@ Instead of holding a camera, smart glasses offer a hands free way to record stuf
 |:--:|:--:|:--:|:--:|
 | Jason P | Stratford Prepatory Blackford | Health | Incoming Sophomore |
 
-<!--  
+<!--
 **Replace the BlueStamp logo below with an image of yourself and your completed project. Follow the guide [here](https://tomcam.github.io/least-github-pages/adding-images-github-pages-site.html) if you need help.**
 
 ![Headstone Image](logo.svg)
 
-
+-->
 # Final Milestone
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/7qXCmAjE5eM?si=l6Hw6ky5PzJQHeuj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/NZ_2Al3L7MA?si=PVjcaJ8wZCsASP4x" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 After hot gluing my camera to my glasses, I wanted to make modifications.  So, I worked on modifications.  Instead of using tensorFlow's general AI, I wanted to train my own.  The first step to this was taking a picture, and being able to send that to google drive.  I first had to download google auth and get google cloud, make an OAuth client, and connect it.  Then, I had to authorize it so it could acess my google drive.  I ran into a lot of problems, such as not being able to log in because "the client didn't support javascript."  However, I fixed it by making sure my creditals were properly made.  When I logged in, the raspberry Pi got access.  It was able to uplaod a file of mine.  So, Then I added the image capturing code above, and now it works well.
-- For your final milestone, explain the outcome of your project. Key details to include are:
-- What you've accomplished since your previous milestone
-- What your biggest challenges and triumphs were at BSE
-- A summary of key topics you learned about
-- What you hope to learn in the future after everything you've learned at BSE
 
 
--->
+
 # Second Milestone
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/KwafafNAArw?si=tgGg_9rC-52swaLf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
