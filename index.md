@@ -58,6 +58,13 @@ from picamera2 import Picamera2, Preview
 import time
 import cv2
 
+import vosk
+import pyaudio
+import json
+
+import pyaudio
+
+
 
 picam2 = Picamera2()
 camera_config = picam2.create_still_configuration(main={"size": (1920, 1080)},
@@ -65,69 +72,94 @@ lores={"size": (640, 480)}, display="lores")
 picam2.configure(camera_config)
 #picam2.start_preview(Preview.QTGL) #Comment this out if not using desktop interface
 picam2.start()
-time.sleep(2)
-im = picam2.capture_array()
-im = cv2.cvtColor(im, cv2.COLOR_BGR2RGB)
-cv2.imwrite('file.png', im)
+
+
+model = vosk.Model("/home/jasonpark/models/vosk-model-small-en-us-0.15")
+rec = vosk.KaldiRecognizer(model, 16000, '["terminate", "upload", "send", "exit"]')
+
+p = pyaudio.PyAudio()
+stream = p.open(format=pyaudio.paInt16,
+                channels=1,
+                rate=16000,
+                input=True,
+                frames_per_buffer=8192)
+
+SCOPES = ['https://www.googleapis.com/auth/drive']
+
+  
+"""Shows basic usage of the Drive v3 API.
+Prints the names and ids of the first 10 files the user has access to.
+"""
+creds = None
+# The file token.json stores the user's access and refresh tokens, and is
+# created automatically when the authorization flow completes for the first
+# time.
+if os.path.exists("token.json"):
+    creds = Credentials.from_authorized_user_file("token.json", SCOPES)
+# If there are no (valid) credentials available, let the user log in.
+if not creds or not creds.valid:
+    if creds and creds.expired and creds.refresh_token:
+        creds.refresh(Request())
+    else:
+        flow = InstalledAppFlow.from_client_secrets_file(
+            "/home/jasonpark/credentials.json", SCOPES
+        )
+    creds = flow.run_local_server(port=0)
+    # Save the credentials for the next run
+    with open("token.json", "w") as token:
+        token.write(creds.to_json())
+
+
+print("Listening for speech. Say 'Terminate' to stop.")
+# Start streaming and recognize speech
+while True:
+    data = stream.read(4096)#read in chunks of 4096 bytes
+    if rec.AcceptWaveform(data):#accept waveform of input voice
+        # Parse the JSON result and get the recognized text
+        result = json.loads(rec.Result())
+        recognized_text = result['text']
+        print(f"Recognized: {recognized_text}")
+        
+        # Check for the termination keyword
+        if "terminate" in recognized_text.lower():
+            print("Termination keyword detected. Stopping...")
+            break
+
+        if "upload" in recognized_text.lower():
+            im = picam2.capture_array()
+            im = cv2.cvtColor(im, cv2.COLOR_BGR2RGB)
+            cv2.imwrite('file.png', im)
+            print("upload keyword detected. uploading...")
+            try:
+                # create drive api client
+                service = build("drive", "v3", credentials=creds)
+                folder_id = "1vx-evFr1qBKo6yGuxheW8QfZfdWrDmRz"
+                file_metadata = {"name": "file.png"
+                                , "parents": [folder_id]}
+
+                media = MediaFileUpload("file.png", mimetype="image/png")
+                # pylint: disable=maybe-no-member
+                file = (
+                    service.files()
+                    .create(body=file_metadata, media_body=media, fields="id")
+                    .execute()
+                )
+                print(f'File ID: {file.get("id")}')
+
+            except HttpError as error:
+                print(f"An error occurred: {error}")
+                file = None
+            print("Upload complete.")
+
+stream.stop_stream()
+stream.close()
+
+# Terminate the PyAudio object
+p.terminate()
+
+
 
 # If modifying these scopes, delete the file token.json.
-SCOPES = ['https://www.googleapis.com/auth/drive']
-def upload_basic():
-  
-    """Shows basic usage of the Drive v3 API.
-  Prints the names and ids of the first 10 files the user has access to.
-  """
-    creds = None
-  # The file token.json stores the user's access and refresh tokens, and is
-  # created automatically when the authorization flow completes for the first
-  # time.
-    if os.path.exists("token.json"):
-        creds = Credentials.from_authorized_user_file("token.json", SCOPES)
-    # If there are no (valid) credentials available, let the user log in.
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
-            flow = InstalledAppFlow.from_client_secrets_file(
-                "credentials.json", SCOPES
-            )
-        creds = flow.run_local_server(port=0)
-        # Save the credentials for the next run
-        with open("token.json", "w") as token:
-            token.write(creds.to_json())
-    """Insert new file.
-    Returns : Id's of the file uploaded
-
-    Load pre-authorized user credentials from the environment.
-    TODO(developer) - See https://developers.google.com/identity
-    for guides on implementing OAuth2 for the application.
-    """
-
-    try:
-        # create drive api client
-        service = build("drive", "v3", credentials=creds)
-        folder_id = "1vx-evFr1qBKo6yGuxheW8QfZfdWrDmRz"
-        file_metadata = {"name": "file.png"
-                          , "parents": [folder_id]}
-
-        media = MediaFileUpload("file.png", mimetype="image/png")
-        # pylint: disable=maybe-no-member
-        file = (
-            service.files()
-            .create(body=file_metadata, media_body=media, fields="id")
-            .execute()
-        )
-        print(f'File ID: {file.get("id")}')
-
-    except HttpError as error:
-        print(f"An error occurred: {error}")
-        file = None
-
-    return file.get("id")
-
-
-if __name__ == "__main__":
-  upload_basic()
 ```
 <!--
 # Bill of Materials
