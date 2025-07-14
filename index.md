@@ -5,12 +5,11 @@ Instead of holding a camera, smart glasses offer a hands free way to record stuf
 |:--:|:--:|:--:|:--:|
 | Jason P | Stratford Prepatory Blackford | Health | Incoming Sophomore |
 
-<!--
-**Replace the BlueStamp logo below with an image of yourself and your completed project. Follow the guide [here](https://tomcam.github.io/least-github-pages/adding-images-github-pages-site.html) if you need help.**
 
-![Headstone Image](logo.svg)
 
--->
+![Headstone Image](JasonP.jpg)
+
+
 # Final Milestone
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/NZ_2Al3L7MA?si=PVjcaJ8wZCsASP4x" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
