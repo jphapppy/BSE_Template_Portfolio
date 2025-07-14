@@ -70,7 +70,7 @@ import subprocess
 
 
 
-genai.configure(api_key="AIzaSyAlwZVLGghp18yCng36Dp5XZnJCTtGx8qo")  
+genai.configure(api_key="...")  
 
 picam2 = Picamera2()
 camera_config = picam2.create_still_configuration(main={"size": (1920, 1080)},
