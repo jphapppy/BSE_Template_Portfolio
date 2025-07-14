@@ -9,6 +9,10 @@ Instead of holding a camera, smart glasses offer a hands free way to record stuf
 
 ![Headstone Image](JasonP.jpg)
 
+# Modification 1
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/x4km8omDQBc?si=jzDNtt75-EbsKW5w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+This time, added voice recognition, gemini, and text to speech saying gemini's response.  The only challenge I ran into this time was the fact that the TTS was not working.  It turns out it was trying to use a voice that wasn't supported but I installed espeak-ng and finally got the TTS to work.
 
 # Final Milestone
 
