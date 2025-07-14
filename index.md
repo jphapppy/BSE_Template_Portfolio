@@ -64,7 +64,13 @@ import json
 
 import pyaudio
 
+from PIL import Image
+import google.generativeai as genai
+import subprocess
 
+
+
+genai.configure(api_key="AIzaSyAlwZVLGghp18yCng36Dp5XZnJCTtGx8qo")  
 
 picam2 = Picamera2()
 camera_config = picam2.create_still_configuration(main={"size": (1920, 1080)},
@@ -124,6 +130,24 @@ while True:
         if "terminate" in recognized_text.lower():
             print("Termination keyword detected. Stopping...")
             break
+
+        if "send" in recognized_text.lower():
+            print("send keyword detected. sending to gemini...")
+            img = Image.open("file.png")  # Ensure the image exists
+
+            # Set up Gemini Vision model
+            model = genai.GenerativeModel("gemini-2.5-flash")
+
+            # Send image with a prompt
+            response = model.generate_content(
+                [
+                    "First, check if this picture has a visible plant.  Asnswer yes or no. Then, check if it has a disease.  If it does, describe what type of disease briefly.",
+                    img
+                ]
+            )
+            gemini_text = response.text
+            print(gemini_text)
+            # Load image from Raspberry Pi
 
         if "upload" in recognized_text.lower():
             im = picam2.capture_array()
