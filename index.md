@@ -1,9 +1,9 @@
 # Smart Glasses
-Instead of holding a camera, smart glasses offer a hands free way to record stuff!  These involve mounting a camera onto a pair of glasses and connecting it to a simple processor system like a raspberry Pi so it is portable.  The camera won't 100% detect what your eyes are seeing, but it still gets most of what your eyes are seeing.
+Instead of holding a camera, smart glasses offer a hands free way to record stuff!  These involve mounting a camera onto a pair of glasses and connecting it to a simple processor system like a Raspberry Pi so it is portable.  The camera won't 100% detect what your eyes are seeing, but it still gets most of what your eyes are seeing.
 
 | **Engineer** | **School** | **Area of Interest** | **Grade** |
 |:--:|:--:|:--:|:--:|
-| Jason P | Stratford Prepatory Blackford | Health | Incoming Sophomore |
+| Jason P | Stratford Preparatory Blackford | Health | Incoming Sophomore |
 
 
 
@@ -12,7 +12,7 @@ Instead of holding a camera, smart glasses offer a hands free way to record stuf
 # Modification 1
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/x4km8omDQBc?si=jzDNtt75-EbsKW5w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-For my modifications, I added voice recognition, gemini, and text to speech saying gemini's response.  The biggest challenge happened when the TTS was not working.  It turns out it was trying to use a voice that wasn't supported but I installed espeak-ng and finally got the TTS to work.  Another problem I faced happened when the TTS was not coming out the headphone jack even though I had it plugged in.  This was a simple fix in the Pi settings.
+For my modifications, I added voice recognition, Gemini, and text to speech saying Gemini's response.  The biggest challenge happened when the TTS was not working.  It turns out it was trying to use a voice that wasn't supported but I installed espeak-ng and finally got the TTS to work.  Another problem I faced happened when the TTS was not coming out the headphone jack even though I had it plugged in.  This was a simple fix in the Pi settings.
 
 # Code
 ```c++
@@ -113,7 +113,7 @@ while True:
             # Send image with a prompt
             response = model.generate_content(
                 [
-                    "First, check if this picture has a visible plant.  Asnswer yes or no. Then, check if it has a disease.  If it does, describe what type of disease briefly.",
+                    "First, check if this picture has a visible plant.  Answer yes or no. Then, check if it has a disease.  If it does, describe what type of disease briefly.",
                     img
                 ]
             )
@@ -162,7 +162,7 @@ Most of the code stays the same, it still is able to capture an image and upload
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/NZ_2Al3L7MA?si=PVjcaJ8wZCsASP4x" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-For my final milestone, after hot gluing my camera to my glasses, I wanted to make modifications because it wouldn't be enough.  Instead of using tensorFlow's general AI, I wanted to train my own or use another AI(like gemini/chatgpt).  The first step to this was taking a picture, and being able to send that to google drive.  I first had to download google auth and get google cloud, make an OAuth client, and connect it.  Then, I had to authorize it so it could acess my google drive.  I ran into a lot of problems, such as not being able to log in because "the client didn't support javascript."  However, I fixed it by making sure my creditals were properly made.  When I logged in, the raspberry Pi got access.  It was able to uplaod a file of mine.  So, Then I added the image capturing code above, and now it works well.
+For my final milestone, after hot gluing my camera to my glasses, I wanted to make modifications because it wouldn't be enough.  Instead of using tensorFlow's general AI, I wanted to train my own or use another AI(like Gemini/chatgpt).  The first step to this was taking a picture, and being able to send that to google drive.  I first had to download google auth and get google cloud, make an OAuth client, and connect it.  Then, I had to authorize it so it could acess my google drive.  I ran into a lot of problems, such as not being able to log in because "the client didn't support javascript."  However, I fixed it by making sure my credentials were properly made.  When I logged in, the raspberry Pi got access.  It was able to upload a file of mine.  So, Then I added the image capturing code above, and now it works well.
 # Code
 ```c++
 from googleapiclient.discovery import build
@@ -250,12 +250,12 @@ def upload_basic():
 if __name__ == "__main__":
   upload_basic()
 ```
-This is my code for taking a photo and uploading it to my google drive.  First, I am importing core modules needed to authenticate with google cloud and upload files to google drive.  Then, I am importing modules realated to the piCam taking pictures.  Next, the piCam takes a picture and writes in in the "file.png" file.  Then, I am declaring my scope.  I set it to "allow all access to drive" so it could upload files and overcome permission errors.  Since I already made my token and authorized it, the code then checks the token.json first, for user access.  It only checks creditials if the token isn't there or it's invalid.  I set it to go to one of the folders in my google drive.
+This is my code for taking a photo and uploading it to my google drive.  First, I am importing core modules needed to authenticate with google cloud and upload files to google drive.  Then, I am importing modules related	to the piCam, which helps take pictures.  Next, the piCam takes a picture and writes in the "file.png" file.  Then, I am declaring my scope.  I set it to "allow all access to drive" so it could upload files and overcome permission errors.  Since I already made my token and authorized it, the code then checks the token.json first, for user access.  It only checks credentials if the token isn't there or it's invalid.  I set it to go to one of the folders in my google drive.
 # Second Milestone
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/KwafafNAArw?si=tgGg_9rC-52swaLf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-This is the second milestone of my project, where I preformed basic object recognition using the piCam. I transitioned from openCV to tensorFlow so I could get videos.  The frame rate is low(because it's just constantly taking pictures, not an actual video) but the dectection is okay.  The amount of commands I had to input into the terminal was a suprise.  Last milestone, I couldn't see exactly what the camera was seeing, but now I can see everything the camera is seeing thanks to tensorFlow.  There is a screen that pops up in the terminal that shows what the camera is seeing, frame by frame.  The camera is able to detect computer keyboards, mouses, and other basic items.  The text to speech works well, but its voice sounds choppy, so I may want to get a better one. I want to put a longer cable for more mobility as well. I now need to put the camera on the glasses.
+This is the second milestone of my project, where I performed basic object recognition using the piCam. I transitioned from openCV to tensorFlow so I could get videos.  The frame rate is low(because it's just constantly taking pictures, not an actual video) but the detection is okay.  The amount of commands I had to input into the terminal was a surprise.  Last milestone, I couldn't see exactly what the camera was seeing, but now I can see everything the camera is seeing thanks to tensorFlow.  There is a screen that pops up in the terminal that shows what the camera is seeing, frame by frame.  The camera is able to detect computer keyboards, mice, and other basic items.  The text to speech works well, but its voice sounds choppy, so I may want to get a better one. I want to put a longer cable for more mobility as well. I now need to put the camera on the glasses.
 # Code
 
 ```c++
@@ -358,7 +358,7 @@ This code keeps checking for objects is recognizes until it is forcefully stoppe
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eIhywB4pccY?si=DQWUQpK5KKYoSYFi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-This is the first milestone for my smart glasses project, which is setting up the raspberry pi.  This was not much of a challenge but it look a long time to download all the apps I needed for the raspberry pi and downloading the software for the pi.  I first had to get OBS, but I couldn't control the Pi on my computer yet.  I had to plug in a keyboard and mouse into the Pi so I could see what was happening on my computer screen.  I needed a direct connection so I could enable the ssh and then got tigerVNC, where I could control the Pi directly on my computer, and then setting up an SSH with VS code so I could code in python and run that code on the Pi.  All waiting aside, now it works well.  I can only take one picture at a time using openCV, but this the first step at using the camera.
+This is the first milestone for my smart glasses project, which is setting up the raspberry pi.  This was not much of a challenge but it took a long time to download all the apps I needed for the raspberry pi and downloading the software for the pi.  I first had to get OBS, but I couldn't control the Pi on my computer yet.  I had to plug in a keyboard and mouse into the Pi so I could see what was happening on my computer screen.  I needed a direct connection so I could enable the ssh and then got tigerVNC, where I could control the Pi directly on my computer, and then setting up an SSH with VS code so I could code in python and run that code on the Pi.  All waiting aside, now it works well.  I can only take one picture at a time using openCV, but this the first step at using the camera.
 # Code
 
 ```c++
