@@ -14,7 +14,6 @@ Instead of holding a camera, smart glasses offer a hands free way to record stuf
 <iframe width="560" height="315" src="https://www.youtube.com/embed/x4km8omDQBc?si=jzDNtt75-EbsKW5w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 For my modifications, I added voice recognition, Gemini, and text to speech saying Gemini's response.  The biggest challenge happened when the TTS was not working.  It turns out it was trying to use a voice that wasn't supported but I installed espeak-ng and finally got the TTS to work.  Another problem I faced happened when the TTS was not coming out the headphone jack even though I had it plugged in.  This was a simple fix in the Pi settings.  I used the voice recognition for hands free image capturing and image sending, so it would be more convient.  Most of the code stays the same, it still is able to capture an image and upload it.  However, now there is a while loop constantly running and picking up audio from my mic.  If it detects a keyword, such as "terminate," "send," or "upload," the respective commands will happen.  "Terminate" stops the program.  "Send" send the most recent "file.png" to gemini.  "Upload" takes a picture, overwrites "file.png," and sends it to google drive.  The code also speaks gemini's response using TTS. The text to speech would speak Gemini's response so the user wouldn't have to look in the terminal.
 
-# Final Milestone
 
 # Code
 ```c++
@@ -159,7 +158,7 @@ p.terminate()
 
 # If modifying these scopes, delete the file token.json.
 ```
-
+# Final Milestone
 <iframe width="560" height="315" src="https://www.youtube.com/embed/NZ_2Al3L7MA?si=PVjcaJ8wZCsASP4x" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 For my final milestone, after hot gluing my camera to my glasses, I wanted to make modifications because it wouldn't be enough.  Instead of using tensorFlow's general AI, I wanted to train my own or use another AI(like Gemini/chatgpt).  The first step to this was taking a picture, and being able to send that to google drive.  I first had to download google auth and get google cloud, make an OAuth client, and connect it.  Then, I had to authorize it so it could acess my google drive.  I ran into a lot of problems, such as not being able to log in because "the client didn't support javascript."  However, I fixed it by making sure my credentials were properly made.  When I logged in, the raspberry Pi got access.  It was able to upload a file of mine.  So, Then I added the image capturing code above, and now it works well.  I wanted to be able to store pictures so that the user could later look at them if they needed it.
