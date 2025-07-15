@@ -26,13 +26,30 @@ After hot gluing my camera to my glasses, I wanted to make modifications.  So, I
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/KwafafNAArw?si=tgGg_9rC-52swaLf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-I transitioned from openCV to tensorFlow so I could get videos.  The frame rate is low, but the dectection is okay.  The amount of commands I had to input into the terminal was a suprise.  Last milestone, I couldn't see exactly what the camera was seeing, but now I can see everything the camera is seeing thanks to tensorFlow.  The camera is able to detect computer keyboards, mouses, and items tensorFlow knows.  The text to speech works well, but its voice sounds choppy, so I may want to get a better one. I want to put a longer cable for more mobility as well. I now need to put the camera on the glasses.
+This is the second milestone of my project, where I preformed basic object recognition using I transitioned from openCV to tensorFlow so I could get videos.  The frame rate is low, but the dectection is okay.  The amount of commands I had to input into the terminal was a suprise.  Last milestone, I couldn't see exactly what the camera was seeing, but now I can see everything the camera is seeing thanks to tensorFlow.  The camera is able to detect computer keyboards, mouses, and items tensorFlow knows.  The text to speech works well, but its voice sounds choppy, so I may want to get a better one. I want to put a longer cable for more mobility as well. I now need to put the camera on the glasses.
 
 # First Milestone
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eIhywB4pccY?si=DQWUQpK5KKYoSYFi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-This is the first milestone for my smart glasses project, which is setting up the raspberry pi.  This was not much of a challenge but it look a long time to download all the apps I needed for the raspberry pi and downloading the software for the pi.  All waiting aside, now it works well.  I can only take one picture at a time using openCV, but this the first step at using the camera.
+This is the first milestone for my smart glasses project, which is setting up the raspberry pi.  This was not much of a challenge but it look a long time to download all the apps I needed for the raspberry pi and downloading the software for the pi.  I first had to get OBS, but I couldn't control the Pi on my computer yet.  I had to plug in a keyboard and mouse into the Pi so I could see what was happening on my computer screen.  I needed a direct connection so I could enable the ssh and then got tigerVNC, where I could control the Pi directly on my computer, and then setting up an SSH with VS code so I could code in python and run that code on the Pi.  All waiting aside, now it works well.  I can only take one picture at a time using openCV, but this the first step at using the camera.
+```c++
+from picamera2 import Picamera2, Preview
+import time
+import cv2
+picam2 = Picamera2()
+camera_config = picam2.create_still_configuration(main={"size": (1920, 1080)},
+lores={"size": (640, 480)}, display="lores")
+picam2.configure(camera_config)
+#picam2.start_preview(Preview.QTGL) #Comment this out if not using desktop interface
+picam2.start()
+time.sleep(2)
+im = picam2.capture_array()
+im = cv2.cvtColor(im, cv2.COLOR_BGR2RGB)
+cv2.imwrite('file.png', im)
+
+```
+What happens here is that the piCam is getting set up, and openCV takes a picture, and it's designated to go to a file named "file.png".  It will overwrite file.png if it already exists.
 
 # Starter Project : Jitterbug
 
