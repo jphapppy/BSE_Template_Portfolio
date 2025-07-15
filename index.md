@@ -18,16 +18,195 @@ This time, added voice recognition, gemini, and text to speech saying gemini's r
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/NZ_2Al3L7MA?si=PVjcaJ8wZCsASP4x" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-After hot gluing my camera to my glasses, I wanted to make modifications.  So, I worked on modifications.  Instead of using tensorFlow's general AI, I wanted to train my own.  The first step to this was taking a picture, and being able to send that to google drive.  I first had to download google auth and get google cloud, make an OAuth client, and connect it.  Then, I had to authorize it so it could acess my google drive.  I ran into a lot of problems, such as not being able to log in because "the client didn't support javascript."  However, I fixed it by making sure my creditals were properly made.  When I logged in, the raspberry Pi got access.  It was able to uplaod a file of mine.  So, Then I added the image capturing code above, and now it works well.
+For my final milestone, after hot gluing my camera to my glasses, I wanted to make modifications because it wouldn't be enough.  Instead of using tensorFlow's general AI, I wanted to train my own or use another AI(like gemini/chatgpt).  The first step to this was taking a picture, and being able to send that to google drive.  I first had to download google auth and get google cloud, make an OAuth client, and connect it.  Then, I had to authorize it so it could acess my google drive.  I ran into a lot of problems, such as not being able to log in because "the client didn't support javascript."  However, I fixed it by making sure my creditals were properly made.  When I logged in, the raspberry Pi got access.  It was able to uplaod a file of mine.  So, Then I added the image capturing code above, and now it works well.
+```c++
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
+from googleapiclient.http import MediaFileUpload
+
+import os.path
+
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+
+from picamera2 import Picamera2, Preview
+import time
+import cv2
 
 
+picam2 = Picamera2()
+camera_config = picam2.create_still_configuration(main={"size": (1920, 1080)},
+lores={"size": (640, 480)}, display="lores")
+picam2.configure(camera_config)
+#picam2.start_preview(Preview.QTGL) #Comment this out if not using desktop interface
+picam2.start()
+time.sleep(2)
+im = picam2.capture_array()
+im = cv2.cvtColor(im, cv2.COLOR_BGR2RGB)
+cv2.imwrite('file.png', im)
+
+# If modifying these scopes, delete the file token.json.
+SCOPES = ['https://www.googleapis.com/auth/drive']
+def upload_basic():
+  
+    """Shows basic usage of the Drive v3 API.
+  Prints the names and ids of the first 10 files the user has access to.
+  """
+    creds = None
+  # The file token.json stores the user's access and refresh tokens, and is
+  # created automatically when the authorization flow completes for the first
+  # time.
+    if os.path.exists("token.json"):
+        creds = Credentials.from_authorized_user_file("token.json", SCOPES)
+    # If there are no (valid) credentials available, let the user log in.
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(
+                "credentials.json", SCOPES
+            )
+        creds = flow.run_local_server(port=0)
+        # Save the credentials for the next run
+        with open("token.json", "w") as token:
+            token.write(creds.to_json())
+    """Insert new file.
+    Returns : Id's of the file uploaded
+
+    Load pre-authorized user credentials from the environment.
+    TODO(developer) - See https://developers.google.com/identity
+    for guides on implementing OAuth2 for the application.
+    """
+
+    try:
+        # create drive api client
+        service = build("drive", "v3", credentials=creds)
+        folder_id = "1vx-evFr1qBKo6yGuxheW8QfZfdWrDmRz"
+        file_metadata = {"name": "file.png"
+                          , "parents": [folder_id]}
+
+        media = MediaFileUpload("file.png", mimetype="image/png")
+        # pylint: disable=maybe-no-member
+        file = (
+            service.files()
+            .create(body=file_metadata, media_body=media, fields="id")
+            .execute()
+        )
+        print(f'File ID: {file.get("id")}')
+
+    except HttpError as error:
+        print(f"An error occurred: {error}")
+        file = None
+
+    return file.get("id")
+
+
+if __name__ == "__main__":
+  upload_basic()
+```
 
 # Second Milestone
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/KwafafNAArw?si=tgGg_9rC-52swaLf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-This is the second milestone of my project, where I preformed basic object recognition using I transitioned from openCV to tensorFlow so I could get videos.  The frame rate is low, but the dectection is okay.  The amount of commands I had to input into the terminal was a suprise.  Last milestone, I couldn't see exactly what the camera was seeing, but now I can see everything the camera is seeing thanks to tensorFlow.  The camera is able to detect computer keyboards, mouses, and items tensorFlow knows.  The text to speech works well, but its voice sounds choppy, so I may want to get a better one. I want to put a longer cable for more mobility as well. I now need to put the camera on the glasses.
+This is the second milestone of my project, where I preformed basic object recognition using the piCam. I transitioned from openCV to tensorFlow so I could get videos.  The frame rate is low(because it's just constantly taking pictures, not an actual video) but the dectection is okay.  The amount of commands I had to input into the terminal was a suprise.  Last milestone, I couldn't see exactly what the camera was seeing, but now I can see everything the camera is seeing thanks to tensorFlow.  There is a screen that pops up in the terminal that shows what the camera is seeing, frame by frame.  The camera is able to detect computer keyboards, mouses, and other basic items.  The text to speech works well, but its voice sounds choppy, so I may want to get a better one. I want to put a longer cable for more mobility as well. I now need to put the camera on the glasses.
+```c++
+ while not capture_manager.stopped:
+        if capture_manager.frame is None:
+            continue
+        buffer.fill((0,0,0))
+        frame = capture_manager.read()
+        # get the raw data frame & swap red & blue channels
+        previewframe = np.ascontiguousarray(capture_manager.frame)
+        # make it an image
+        img = pygame.image.frombuffer(previewframe, capture_manager.resolution, 'RGB')
+        img = pygame.transform.scale(img, scaled_resolution)
 
+        cropped_region = (
+            (img.get_width() - buffer.get_width()) // 2,
+            (img.get_height() - buffer.get_height()) // 2,
+            buffer.get_width(),
+            buffer.get_height()
+        )
+
+        # draw it!
+        buffer.blit(img, (0, 0), cropped_region)
+
+        timestamp = time.monotonic()
+        if args.tflite:
+            prediction = model.tflite_predict(frame)[0]
+        else:
+            prediction = model.predict(frame)[0]
+        logging.info(prediction)
+        delta = time.monotonic() - timestamp
+        logging.info("%s inference took %d ms, %0.1f FPS" % ("TFLite" if args.tflite else "TF", delta * 1000, 1 / delta))
+        print(last_seen)
+
+        # add FPS & temp on top corner of image
+        fpstext = "%0.1f FPS" % (1/delta,)
+        fpstext_surface = smallfont.render(fpstext, True, (255, 0, 0))
+        fpstext_position = (buffer.get_width()-10, 10) # near the top right corner
+        buffer.blit(fpstext_surface, fpstext_surface.get_rect(topright=fpstext_position))
+        try:
+            temp = int(open("/sys/class/thermal/thermal_zone0/temp").read()) / 1000
+            temptext = "%d\N{DEGREE SIGN}C" % temp
+            temptext_surface = smallfont.render(temptext, True, (255, 0, 0))
+            temptext_position = (buffer.get_width()-10, 30) # near the top right corner
+            buffer.blit(temptext_surface, temptext_surface.get_rect(topright=temptext_position))
+        except OSError:
+            pass
+
+        for p in prediction:
+            label, name, conf = p
+            if conf > CONFIDENCE_THRESHOLD:
+                print("Detected", name)
+
+                persistant_obj = False  # assume the object is not persistant
+                last_seen.append(name)
+                last_seen.pop(0)
+
+                inferred_times = last_seen.count(name)
+                if inferred_times / len(last_seen) > PERSISTANCE_THRESHOLD:  # over quarter time
+                    persistant_obj = True
+
+                detecttext = name.replace("_", " ")
+                detecttextfont = None
+                for f in (bigfont, medfont, smallfont):
+                    detectsize = f.size(detecttext)
+                    if detectsize[0] < screen.get_width(): # it'll fit!
+                        detecttextfont = f
+                        break
+                else:
+                    detecttextfont = smallfont # well, we'll do our best
+                detecttext_color = (0, 255, 0) if persistant_obj else (255, 255, 255)
+                detecttext_surface = detecttextfont.render(detecttext, True, detecttext_color)
+                detecttext_position = (buffer.get_width()//2,
+                                       buffer.get_height() - detecttextfont.size(detecttext)[1])
+                buffer.blit(detecttext_surface, detecttext_surface.get_rect(center=detecttext_position))
+
+                if persistant_obj and last_spoken != detecttext:
+                    subprocess.call(f"echo {detecttext} | festival --tts &", shell=True)
+                    last_spoken = detecttext
+                break
+        else:
+            last_seen.append(None)
+            last_seen.pop(0)
+            if last_seen.count(None) == len(last_seen):
+                last_spoken = None
+
+        screen.blit(pygame.transform.rotate(buffer, args.rotation), (0,0))
+        pygame.display.update()
+
+if __name__ == "__main__":
+    args = parse_args()
+    try:
+        main(args)
+    except KeyboardInterrupt:
+        capture_manager.stop()
+
+```
+This code keeps checking for objects is recognizes until it is forcefully stopped by the keyboard command "control C"(assuming no errors with piCam, system, etc.)  If it's confidence is over 50%, it will say the name of the object it thinks it saw on the screen.
 # First Milestone
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eIhywB4pccY?si=DQWUQpK5KKYoSYFi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
