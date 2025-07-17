@@ -9,6 +9,9 @@ Instead of holding a camera, smart glasses offer a hands free way to record stuf
 
 ![Headstone Image](JasonP.jpg)
 
+Modification 2
+For my final modification, I added an OLED screen so other people could see the functions I was performing.  When I send the picture to gemini, the OLED displays a gemini icon.  When I send the picture to google, it shows an upload icon.  Finally, when it terminates, it displays an "x" icon.  Since it is transparent, I can see from both sides.  So I made a holder
+
 # Modification 1
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/x4km8omDQBc?si=jzDNtt75-EbsKW5w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
