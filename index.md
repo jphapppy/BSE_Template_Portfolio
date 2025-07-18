@@ -24,7 +24,7 @@ from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaFileUpload
 
 import os.path
-
+import os
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -39,12 +39,22 @@ import json
 
 import pyaudio
 
-from PIL import Image
+
 import google.generativeai as genai
 import subprocess
+import sys
+import shlex
 
+picdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'pic')
+libdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'lib')
+if os.path.exists(libdir):
+    sys.path.append(libdir)
 
-
+from waveshare_OLED import OLED_1in51
+from PIL import Image
+disp = OLED_1in51.OLED_1in51()
+disp.Init()
+disp.clear()
 genai.configure(api_key="...")  
 
 picam2 = Picamera2()
@@ -83,9 +93,18 @@ if not creds or not creds.valid:
         creds.refresh(Request())
     else:
         flow = InstalledAppFlow.from_client_secrets_file(
-            "/home/jasonpark/credentials.json", SCOPES
+            "/home/jasonpark/credentials.json", SCOPES,
+                redirect_uri='urn:ietf:wg:oauth:2.0:oob'
+
         )
-    creds = flow.run_local_server(port=0)
+        auth_url, _ = flow.authorization_url(prompt='consent')
+
+        print(f'Please go to this URL: {auth_url}')
+
+        code = input('Enter the authorization code: ')
+
+        flow.fetch_token(code=code)
+        creds = flow.credentials
     # Save the credentials for the next run
     with open("token.json", "w") as token:
         token.write(creds.to_json())
@@ -100,14 +119,26 @@ while True:
         result = json.loads(rec.Result())
         recognized_text = result['text']
         print(f"Recognized: {recognized_text}")
-        
+
         # Check for the termination keyword
         if "terminate" in recognized_text.lower():
             print("Termination keyword detected. Stopping...")
+            Himage2 = Image.new('1', (disp.width, disp.height), 255)  # 255: clear the frame
+            bmp = Image.open(os.path.join(picdir, '/home/jasonpark/converted2.bmp'))
+            Himage2.paste(bmp, (0,0))
+            Himage2=Himage2.rotate(180) 	
+            disp.ShowImage(disp.getbuffer(Himage2)) 
+            time.sleep(3)
+            disp.clear()
             break
 
         if "send" in recognized_text.lower():
             print("send keyword detected. sending to gemini...")
+            Himage2 = Image.new('1', (disp.width, disp.height), 255)  # 255: clear the frame
+            bmp = Image.open(os.path.join(picdir, '/home/jasonpark/converted1.bmp'))
+            Himage2.paste(bmp, (0,0))
+            Himage2=Himage2.rotate(180) 	
+            disp.ShowImage(disp.getbuffer(Himage2)) 
             img = Image.open("file.png")  # Ensure the image exists
 
             # Set up Gemini Vision model
@@ -116,15 +147,24 @@ while True:
             # Send image with a prompt
             response = model.generate_content(
                 [
-                    "First, check if this picture has a visible plant.  Answer yes or no. Then, check if it has a disease.  If it does, describe what type of disease briefly.",
+                    "Describe the content of this image in 2-3 sentences.",
                     img
                 ]
             )
             gemini_text = response.text
             print(gemini_text)
+            
+            os.system(f"espeak {shlex.quote(gemini_text)}")
+
+            disp.clear() # Use espeak to read the response aloud
             # Load image from Raspberry Pi
 
         if "upload" in recognized_text.lower():
+            Himage2 = Image.new('1', (disp.width, disp.height), 255)  # 255: clear the frame
+            bmp = Image.open(os.path.join(picdir, '/home/jasonpark/converted.bmp'))
+            Himage2.paste(bmp, (0,0))
+            Himage2=Himage2.rotate(180) 	
+            disp.ShowImage(disp.getbuffer(Himage2)) 
             im = picam2.capture_array()
             im = cv2.cvtColor(im, cv2.COLOR_BGR2RGB)
             cv2.imwrite('file.png', im)
@@ -149,6 +189,8 @@ while True:
                 print(f"An error occurred: {error}")
                 file = None
             print("Upload complete.")
+            os.system(f"espeak 'Upload complete.'") 
+            disp.clear()
 
 stream.stop_stream()
 stream.close()
