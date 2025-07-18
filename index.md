@@ -431,17 +431,22 @@ This was my first project here at BlueStamp where I put my soldering skills to t
 <!--
 Schematics 
 Here's where you'll put images of your schematics. [Tinkercad](https://www.tinkercad.com/blog/official-guide-to-tinkercad-circuits) and [Fritzing](https://fritzing.org/learning/) are both great resoruces to create professional schematic diagrams, though BSE recommends Tinkercad becuase it can be done easily and for free in the browser. 
-
+-->
 # Bill of Materials
 Here's where you'll list the parts in your project. To add more rows, just copy and paste the example rows below.
 Don't forget to place the link of where to buy each component inside the quotation marks in the corresponding row after href =. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize this to your project needs. 
 
 | **Part** | **Note** | **Price** | **Link** |
 |:--:|:--:|:--:|:--:|
-| Item Name | What the item is used for | $Price | <a href="https://www.amazon.com/Arduino-A000066-ARDUINO-UNO-R3/dp/B008GRTSV6/"> Link </a> |
-| Item Name | What the item is used for | $Price | <a href="https://www.amazon.com/Arduino-A000066-ARDUINO-UNO-R3/dp/B008GRTSV6/"> Link </a> |
-| Item Name | What the item is used for | $Price | <a href="https://www.amazon.com/Arduino-A000066-ARDUINO-UNO-R3/dp/B008GRTSV6/"> Link </a> |
--->
+| Raspberry Pi 4 Kit (4GB) | Main processor board for Smart Glasses | $119.99 | <a href="Amazon.com: CanaKit Raspberry Pi 4 4GB Starter PRO Kit - 4GB RAM : Electronics">Link</a> |
+| USB Capture Card | Capture and transfer HDMI video input to Pi | $9.98 | <a href="https://www.amazon.com/Audio-Express-AXHDCAP-Broadcasting-Conference/dp/B0C2MDTY8P/...">Link</a> |
+| Wired Keyboard & Mouse | Input devices to set up and control the Pi | $12.86 | <a href="https://www.amazon.com/AmazonBasics-Wired-Computer-Keyboard-Bundle/dp/B00B7GV802/...">Link</a> |
+| Pi Camera (Arducam) | Camera module to record video from glasses | $10.98 | <a href="https://www.amazon.com/Arducam-Megapixels-Sensor-OV5647-Raspberry/dp/B07RWCGX5K/...">Link</a> |
+| Pi Camera 2ft Cable | Extended cable to mount the camera on glasses | $4.89 | <a href="https://www.amazon.com/A1-FFCs-Black-Raspberry-Camera/dp/B07J68TJ7L/...">Link</a> |
+| Glasses | Mounting frame for the Pi camera | $6.99 | <a href="https://www.amazon.com/dp/B0BSF4PL2Q?...">Link</a> |
+| Power Bank (5V, 3A, 10000 mAh) | Portable power supply for Raspberry Pi | $15.98 | <a href="https://www.amazon.com/INIU-High-Speed-Flashlight-Powerbank-Compatible/dp/B07CZDXDG8/...">Link</a> |
+| Ear Piece | Audio output for discreet listening | $10.40 | <a href="https://www.amazon.com/dp/B0DQWQXHG5?ref=fed_asin_title&th=1">Link</a> |
+
 # Other Resources/Examples
 - [Example 1](https://zoemell.github.io/Zoe_BSE_Portfolio/)
 - [Example 2](https://thedinosour.github.io/Chris_BlueStampPortfolio/)
