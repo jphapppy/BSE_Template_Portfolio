@@ -18,9 +18,11 @@ For my  modification, I wanted to integrate Gemini so it could recognize plant d
 ![Headstone Image](holder.png)
 
 This is the 3D print for the OLED holder.
+
 ![Headstone Image](middle.png)
 
 This is the 3D print for the module connector.  I attached some bolts to the OLED module and hotglued those bolts to this, and this square the side of my glasses.
+
 ![Headstone Image](both.png)
 
 This is what they look like on my glasses.
