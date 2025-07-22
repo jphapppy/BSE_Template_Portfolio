@@ -1,5 +1,5 @@
 # Smart Glasses
-Instead of holding a camera, smart glasses offer a hands free way to record stuff!  These involve mounting a camera onto a pair of glasses and connecting it to a simple processor system like a Raspberry Pi so it is portable.  The camera won't 100% detect what your eyes are seeing, but it still gets most of what your eyes are seeing.
+My smart glasses use gemini, google cloud, vosk, pyaudio, google drive, and an OLED screen.  I input a voice command, pyaudio picks it up, vosk recognizes the audio and converts in into a command.  Using voice commands, I either take a picture, send a picture to gemini, upload a photo to google drive, or terminate the program.  The OLED screen displays something related to this.
 
 | **Engineer** | **School** | **Area of Interest** | **Grade** |
 |:--:|:--:|:--:|:--:|
@@ -15,13 +15,16 @@ Instead of holding a camera, smart glasses offer a hands free way to record stuf
 
 For my  modification, I wanted to integrate Gemini so it could recognize plant dieases from an image, combined with having an OLED screen displaying these commands.  I also wanted to pair Gemini's response with TTS.  It would speak Gemini's response so the user wouldn't have to look in the terminal.  The biggest challenge happened when the TTS was not working.  It turns out it was trying to use a voice that wasn't supported but I installed espeak-ng and finally got the TTS to work.  Another problem I faced happened when the TTS was not coming out the headphone jack even though I had it plugged in.  This was a simple fix in the Pi settings.  I then used pyaudio voice recognition for hands free image capturing and image sending, so it would be more convient.  Most of the code stays the same, it still is able to capture an image and upload it.  However, now there is a while loop constantly running and picking up audio from my mic.  If it detects a keyword, such as "terminate," "send," or "upload," the respective commands will happen.  "Terminate" stops the program.  "Send" send the most recent "file.png" to gemini.  "Upload" takes a picture, overwrites "file.png," and sends it to google drive.  I also added an OLED screen so other people could see the functions I was performing.  When I send the picture to gemini, the OLED displays a gemini icon.  When I send the picture to google, it shows an upload icon.  Finally, when it terminates, it displays an "x" icon.  I wanted to put this on my glasses, so I had to consider both the OLED module and the screen itself.  I first 3D printed a small square, and put screws and bolts on the module, as it already had holes.  I hotglued these bolts onto the square, and then I hotglued everything onto the side of the glasses.  For the screen, I 3d printed a little holder it could slide into.  Some problems I ran into concerning the OLED was that it would randomly glitch out and stop displaying stuff.  At first, I thought that the problem was a loose ribbon.  But in reality, it was faulty wiring.  I fixed it by hotgluing the wires together and tested the connection with a multimeter.
 
+Fig.1
 ![Headstone Image](holder.png)
 
-This is the 3D print for the OLED holder.
 
+Fig1. This is the 3D print for the OLED holder.
+
+Fig.2
 ![Headstone Image](middle.png)
 
-This is the 3D print for the module connector.  I attached some bolts to the OLED module and hotglued those bolts to this, and this square the side of my glasses.
+Fig.2 This is the 3D print for the module connector.  I attached some bolts to the OLED module and hotglued those bolts to this, and this square the side of my glasses.
 
 ![Headstone Image](both.png)
 
@@ -216,7 +219,7 @@ p.terminate()
 # Final Milestone
 <iframe width="560" height="315" src="https://www.youtube.com/embed/NZ_2Al3L7MA?si=PVjcaJ8wZCsASP4x" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-For my final milestone, after hot gluing my camera to my glasses, I wanted to add modifications because I wanted to do more for this milestone.  I used google cloud to send pictures from my raspberry pi to my google drive folder. I first had to download google auth and get google cloud, make an OAuth client, and connect it.  Then, I had to authorize it so it could acess my google drive.  I ran into a lot of problems, such as not being able to log in because "the client didn't support javascript."  However, I fixed it by making sure my credentials were properly made.  When I logged in, the raspberry Pi got access.  It was able to upload a file of mine.  So, Then I added the image capturing code below, and now it works well.  I wanted to be able to store pictures so that the user could later look at them if they needed it.
+For my final milestone, after hot gluing my camera to my glasses, I used google cloud to send pictures from my raspberry pi to my google drive folder. I first had to download google auth and get google cloud, make an OAuth client, and connect it.  Then, I had to authorize it so it could access my google drive.  I ran into a lot of problems, such as not being able to log in because "the client didn't support javascript."  However, I fixed it by making sure my credentials were properly made.  When I logged in, the raspberry Pi got access.  It was able to upload a file in the raspberry pi.  After, I made it take a picture with the Picam and send that photo to my drive folder called "raspberry pi stuff."  I wanted to be able to store pictures so that the user could later look at them if they needed it.
 
 # Code
 ```python
@@ -310,7 +313,7 @@ This is my code for taking a photo and uploading it to my google drive.  First, 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/KwafafNAArw?si=tgGg_9rC-52swaLf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-This is the second milestone of my project, where I performed basic object recognition using the Picam. I transitioned from openCV to tensorFlow so I could do object recognition.  The frame rate is low (because it's just constantly taking pictures, not an actual video) but the detection is decent.  The amount of commands I had to input into the terminal was a surprise.  Last milestone, I couldn't see exactly what the camera was seeing, but now I can see everything the camera is seeing thanks to tensorFlow.  There is a screen that pops up in the terminal that shows what the camera is seeing, frame by frame.  The camera is able to detect computer keyboards, mice, and other basic items.  The model says the object it detects out loud. This was a stepping stone for better recognition.  I kept running into errors in downloading tensorFlow, but i fixed it by running the commands line-by-line (i just copied and pasted a block of commands before this).
+This is the second milestone of my project, where I performed basic object recognition using the Picam. I transitioned from openCV to tensorFlow so I could do object recognition.  The frame rate is low (because it's just constantly taking pictures, not an actual video) but the detection is decent.  I had to input a lot of downloading commands to get this to work.  Last milestone, I couldn't see exactly what the camera was seeing, but now I can see everything the camera is seeing thanks to tensorFlow.  There is a screen that pops up in the terminal that shows what the camera is seeing, frame by frame.  The camera is able to detect computer keyboards, mice, and other basic items.  The model says the object it detects out loud. This was a stepping stone for better recognition.  I kept running into errors in downloading tensorFlow, but i fixed it by running the commands line-by-line (i just copied and pasted a block of commands before this).
 # Code
 
 ```python
@@ -414,6 +417,7 @@ This code keeps checking for objects is recognizes until it is forcefully stoppe
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eIhywB4pccY?si=DQWUQpK5KKYoSYFi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 This is the first milestone for my smart glasses project, which is setting up the raspberry pi.  This was not much of a challenge but it took a long time to download all the apps I needed for the raspberry pi and downloading the software for the pi.  I first had to get OBS, but I couldn't control the Pi on my computer yet.  I had to plug in a keyboard and mouse into the Pi so I could see what was happening on my computer screen.  I needed a direct connection so I could enable the ssh and then got tigerVNC, where I could control the Pi directly on my computer, and then setting up an SSH with VS code so I could code in python and run that code on the Pi.  All waiting aside, now it works well.  I can only take one picture at a time using openCV, but this the first step at using the camera.  Now that I know the Picam works properly, I can continue to improve on it.
+
 # Code
 
 ```python
