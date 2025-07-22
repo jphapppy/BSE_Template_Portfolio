@@ -459,6 +459,6 @@ Here's where you'll put images of your schematics. [Tinkercad](https://www.tinke
 | Ear Piece | Audio output for discreet listening | $10.40 | <a href="https://www.amazon.com/dp/B0DQWQXHG5?ref=fed_asin_title&th=1](https://www.amazon.com/dp/B0DQWQXHG5?ref=fed_asin_title&th=1">Link</a> |
 
 # Other Resources/Examples
-- [Example 1](https://zoemell.github.io/Zoe_BSE_Portfolio/)
-- [Example 2](https://thedinosour.github.io/Chris_BlueStampPortfolio/)
+- [Smart Glasses ZM](https://zoemell.github.io/Zoe_BSE_Portfolio/)
+- [Smart Glasses CY](https://thedinosour.github.io/Chris_BlueStampPortfolio/)
 
