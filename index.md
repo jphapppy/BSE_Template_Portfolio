@@ -32,19 +32,23 @@ This is what they look like on my glasses.
 
 ![Headstone Image](camera.png)
 ![Headstone Image](camerabmp.png)
-This is the icon for "take a picture."
+
+This is the icon for "take a picture," with the bmp.
 
 ![Headstone Image](uplaod.png)
 ![Headstone Image](upbmp.png)
-This is the icon for "upload to google drive."
+
+This is the icon for "upload to google drive," with the bmp.
 
 ![Headstone Image](gemini.png)
 ![Headstone Image](gembmp.png)
-This is the icon for "send to gemini."
+
+This is the icon for "send to gemini," with the bmp.
 
 ![Headstone Image](terminate.png)
 ![Headstone Image](termbmp.png)
-This is the icon for "terminate."
+
+This is the icon for "terminate," with the bmp.
 
 
 # Code
