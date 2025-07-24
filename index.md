@@ -31,9 +31,16 @@ Fig.2 This is the 3D print for the module connector.  I attached some bolts to t
 This is what they look like on my glasses.
 
 ![Headstone Image](camera.png)
+This is icon for "take a picture."
+
 ![Headstone Image](uplaod.png)
+This is icon for "upload to google drive."
+
 ![Headstone Image](gemini.png)
+This is icon for "send to gemini."
+
 ![Headstone Image](terminate.png)
+This is icon for "terminate."
 
 
 # Code
