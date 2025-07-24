@@ -30,6 +30,11 @@ Fig.2 This is the 3D print for the module connector.  I attached some bolts to t
 
 This is what they look like on my glasses.
 
+![Headstone Image](camera.png)
+![Headstone Image](uplaod.png)
+![Headstone Image](gemini.png)
+![Headstone Image](terminate.png)
+
 
 # Code
 ```c++
